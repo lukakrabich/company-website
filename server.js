@@ -5,7 +5,7 @@ const session = require('express-session');
 const db = require('./db');
 const bcrypt = require('bcrypt');
 const app = express();
-const PORT = 3000;
+const PORT = process.env.PORT || 3000;
 
 // Middleware
 app.use(express.static('public'));
@@ -251,3 +251,4 @@ app.get('/logout', (req, res) => {
 app.listen(PORT, () => {
   console.log(`Сервер запущен на http://localhost:${PORT}`);
 });
+
