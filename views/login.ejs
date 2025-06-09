@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <title>Вход – Альянс Торг</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-50 text-gray-800 font-sans">
+  <main class="max-w-md mx-auto p-6 mt-10 bg-white rounded shadow">
+    <h2 class="text-2xl font-bold mb-6 text-center">Вход</h2>
+    <form action="/login" method="POST" class="space-y-4">
+      <input type="email" name="email" placeholder="Email" required class="w-full border p-2 rounded" />
+      <input type="password" name="password" placeholder="Пароль" required class="w-full border p-2 rounded" />
+      <button type="submit" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 w-full">Войти</button>
+    </form>
+    <p class="mt-4 text-sm text-center">Нет аккаунта? <a href="/register" class="text-blue-600 hover:underline">Зарегистрироваться</a></p>
+  </main>
+</body>
+</html>

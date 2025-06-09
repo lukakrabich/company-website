@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta name="description" content="Каталог услуг Альянс Торг">
+  <meta name="keywords" content="услуги, каталог, фильтры, сортировка, финансы, консалтинг">
+  <meta name="author" content="Альянс Торг">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Каталог – Альянс Торг</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-50 text-gray-800 font-sans">
+  <header class="bg-blue-600 text-white p-4">
+    <div class="container mx-auto flex justify-between items-center">
+      <h1 class="text-2xl font-bold">Альянс Торг</h1>
+      <nav class="space-x-4">
+        <a href="/" class="hover:underline">Главная</a>
+        <a href="/catalog" class="hover:underline">Каталог</a>
+        <a href="/cart" class="hover:underline">Корзина</a>
+        <a href="/contacts" class="hover:underline">Контакты</a>
+        <a href="/account" class="hover:underline">Мои заказы</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="max-w-6xl mx-auto p-6 space-y-10">
+    <h2 class="text-3xl font-bold text-center mb-6">Каталог услуг</h2>
+
+    <!-- Форма фильтров и сортировки -->
+    <form method="GET" action="/catalog" class="bg-white p-4 rounded shadow mb-8 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4">
+      <select name="category" class="border p-2 rounded">
+        <option value="">Все категории</option>
+        <option value="Консалтинг" <%= (category === 'Консалтинг') ? 'selected' : '' %>>Консалтинг</option>
+        <option value="Бухгалтерия" <%= (category === 'Бухгалтерия') ? 'selected' : '' %>>Бухгалтерия</option>
+        <option value="Финансы" <%= (category === 'Финансы') ? 'selected' : '' %>>Финансы</option>
+      </select>
+
+      <input type="number" name="minPrice" placeholder="Цена от" value="<%= minPrice || '' %>" class="border p-2 rounded">
+      <input type="number" name="maxPrice" placeholder="Цена до" value="<%= maxPrice || '' %>" class="border p-2 rounded">
+
+      <select name="sort" class="border p-2 rounded">
+        <option value="">Сортировка по умолчанию</option>
+        <option value="price_asc" <%= sort === 'price_asc' ? 'selected' : '' %>>Сначала дешёвые</option>
+        <option value="price_desc" <%= sort === 'price_desc' ? 'selected' : '' %>>Сначала дорогие</option>
+      </select>
+
+      <div class="col-span-full text-center">
+        <button type="submit" class="bg-blue-600 text-white px-6 py-2 rounded hover:bg-blue-700">Применить</button>
+      </div>
+    </form>
+
+    <!-- Список услуг -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+      <% services.forEach(service => { %>
+        <div class="bg-white rounded-lg shadow p-6 flex flex-col justify-between">
+          <div>
+            <h4 class="text-lg font-bold mb-2"><%= service.name %></h4>
+            <p class="text-sm text-gray-500 mb-1"><%= service.type %> | <%= service.category %></p>
+            <p class="text-blue-600 font-bold text-lg mb-4"><%= service.price %> ₽</p>
+            <p class="text-gray-600 text-sm mb-4"><%= service.description %></p>
+          </div>
+          <a href="/service/<%= service.id %>" class="mt-auto inline-block bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 text-center">
+            Подробнее
+          </a>
+        </div>
+      <% }) %>
+    </div>
+  </main>
+
+  <footer class="bg-gray-200 text-center p-4 mt-10 text-sm">
+    <p>© ООО «Альянс Торг», 2025. Все права защищены.</p>
+  </footer>
+</body>
+</html>

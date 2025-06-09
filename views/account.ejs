@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta name="description" content="Альянс Торг – профессиональные услуги в сфере финансов, бухгалтерии и консалтинга.">
+  <meta name="keywords" content="услуги, Альянс Торг, финансы, бухгалтерия, консалтинг, Москва">
+  <meta name="author" content="Альянс Торг">
+
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Мои заказы – Альянс Торг</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-50 text-gray-800 font-sans">
+  <header class="bg-blue-600 text-white p-4">
+    <div class="container mx-auto flex justify-between items-center">
+      <h1 class="text-2xl font-bold">Мои заказы</h1>
+      <a href="/" class="hover:underline">На главную</a>
+    </div>
+  </header>
+
+  <main class="max-w-4xl mx-auto p-6 space-y-8">
+    <h2 class="text-2xl font-bold mb-4 text-center">История заказов</h2>
+
+    <% if (orders.length === 0) { %>
+      <p class="text-center text-gray-500">Вы ещё не оформляли услуги.</p>
+    <% } else { %>
+      <div class="space-y-6">
+        <% orders.forEach(order => { %>
+          <div class="bg-white p-6 rounded shadow space-y-2 border">
+            <p><strong>Номер заказа:</strong> <%= order.id %></p>
+            <p><strong>Имя:</strong> <%= order.name %></p>
+            <p><strong>Email:</strong> <%= order.email %></p>
+            <p><strong>Телефон:</strong> <%= order.phone %></p>
+            <p><strong>Способ доставки:</strong> <%= order.delivery %></p>
+            <p><strong>Способ оплаты:</strong> <%= order.payment %></p>
+            <p><strong>Дата:</strong> <%= order.created_at %></p>
+            <p><strong>Статус:</strong> <%= order.status %></p>
+            <p><strong>Услуги:</strong></p>
+            <ul class="list-disc list-inside text-sm text-gray-700">
+              <% JSON.parse(order.items).forEach(item => { %>
+                <li><%= item.name %> — <%= item.price %> ₽</li>
+              <% }) %>
+            </ul>
+          </div>
+        <% }) %>
+      </div>
+    <% } %>
+  </main>
+
+  <footer class="bg-gray-200 text-center p-4 mt-10 text-sm">
+    <p>© ООО «Альянс Торг», 2025. Все права защищены.</p>
+  </footer>
+</body>
+</html>

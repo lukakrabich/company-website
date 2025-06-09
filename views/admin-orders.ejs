@@ -1,0 +1,59 @@
+<%- include('partials/header') %>
+
+<div class="max-w-6xl mx-auto p-6">
+  <h1 class="text-3xl font-bold mb-6">Управление заказами</h1>
+
+  <form method="GET" action="/admin/orders" class="mb-6 flex gap-4 items-center">
+    <label for="status" class="font-semibold">Фильтр по статусу:</label>
+    <select name="status" id="status" class="border px-3 py-2 rounded">
+      <option value="">Все</option>
+      <option value="Новый" <%= status === 'Новый' ? 'selected' : '' %>>Новый</option>
+      <option value="Обработан" <%= status === 'Обработан' ? 'selected' : '' %>>Обработан</option>
+      <option value="Завершён" <%= status === 'Завершён' ? 'selected' : '' %>>Завершён</option>
+      <option value="Отменён" <%= status === 'Отменён' ? 'selected' : '' %>>Отменён</option>
+    </select>
+    <button type="submit" class="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700">
+      Применить
+    </button>
+  </form>
+
+  <% if (orders.length === 0) { %>
+    <p class="text-gray-500">Нет заказов для отображения.</p>
+  <% } else { %>
+    <div class="space-y-6">
+      <% orders.forEach(order => { %>
+        <div class="bg-white shadow p-4 rounded border">
+          <p><strong>ID заказа:</strong> <%= order.id %></p>
+          <p><strong>Пользователь:</strong> <%= order.email %> (ID: <%= order.user_id %>)</p>
+          <p><strong>Телефон:</strong> <%= order.phone %></p>
+          <p><strong>Дата:</strong> <%= order.date %></p>
+          <p><strong>Доставка:</strong> <%= order.delivery %></p>
+          <p><strong>Оплата:</strong> <%= order.payment %></p>
+          <p><strong>Статус:</strong> <%= order.status %></p>
+
+          <p class="mt-2 font-semibold">Услуги:</p>
+          <ul class="list-disc list-inside text-sm text-gray-700">
+            <% try { JSON.parse(order.items).forEach(item => { %>
+              <li><%= item.name %> — <%= item.price %> ₽</li>
+            <% }) } catch(e) { %>
+              <li>Ошибка при разборе JSON</li>
+            <% } %>
+          </ul>
+
+          <form action="/admin/orders/<%= order.id %>/status" method="POST" class="mt-4">
+            <label class="block mb-1 font-semibold" for="status-<%= order.id %>">Изменить статус:</label>
+            <select name="status" id="status-<%= order.id %>" class="border rounded px-2 py-1">
+              <option value="Новый" <%= order.status === 'Новый' ? 'selected' : '' %>>Новый</option>
+              <option value="Обработан" <%= order.status === 'Обработан' ? 'selected' : '' %>>Обработан</option>
+              <option value="Завершён" <%= order.status === 'Завершён' ? 'selected' : '' %>>Завершён</option>
+              <option value="Отменён" <%= order.status === 'Отменён' ? 'selected' : '' %>>Отменён</option>
+            </select>
+            <button type="submit" class="ml-2 px-4 py-1 bg-blue-600 text-white rounded">Сохранить</button>
+          </form>
+        </div>
+      <% }) %>
+    </div>
+  <% } %>
+</div>
+
+<%- include('partials/footer') %>

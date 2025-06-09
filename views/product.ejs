@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta name="description" content="Альянс Торг – профессиональные услуги в сфере финансов, бухгалтерии и консалтинга.">
+  <meta name="keywords" content="услуги, Альянс Торг, финансы, бухгалтерия, консалтинг, Москва">
+  <meta name="author" content="Альянс Торг">
+
+  <meta charset="UTF-8">
+  <title><%= product.name %> – Альянс Торг</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-50 text-gray-800 font-sans">
+
+  <header class="bg-blue-600 text-white p-4">
+    <h1 class="text-2xl font-bold">Альянс Торг</h1>
+    <nav class="mt-2">
+      <a href="/" class="mr-4 hover:underline">Главная</a>
+      <a href="/catalog" class="mr-4 hover:underline">Каталог</a>
+      <a href="/cart" class="mr-4 hover:underline">Корзина</a>
+      <a href="/contacts" class="hover:underline">Контакты</a>
+    </nav>
+  </header>
+
+  <main class="max-w-4xl mx-auto p-6">
+    <div class="bg-white shadow rounded-lg p-6 flex flex-col md:flex-row gap-6">
+      <div class="md:w-1/2 bg-gray-100 h-64 flex items-center justify-center text-gray-400">
+        <span>Фото товара</span>
+      </div>
+      <div class="md:w-1/2">
+        <h2 class="text-2xl font-semibold mb-2"><%= product.name %></h2>
+        <p class="text-gray-600 mb-1"><%= product.brand %> | <%= product.category %></p>
+        <p class="text-xl text-blue-600 font-bold mb-4"><%= product.price %> ₽</p>
+        <p class="mb-4"><%= product.description %></p>
+
+        <form method="POST" action="/cart/add/<%= product.id %>">
+          <button class="bg-blue-500 text-white px-5 py-2 rounded hover:bg-blue-600" type="submit">
+            Добавить в корзину
+          </button>
+        </form>
+      </div>
+    </div>
+
+    <!-- Отзывы и форма -->
+    <hr class="my-6">
+
+    <h3 class="text-xl font-semibold mb-2">Отзывы покупателей</h3>
+
+    <% if (productReviews.length === 0) { %>
+      <p class="text-gray-500">Пока нет отзывов. Будьте первым!</p>
+    <% } else { %>
+      <ul class="space-y-3 mb-6">
+        <% productReviews.forEach(r => { %>
+          <li class="bg-gray-100 p-3 rounded">
+            <strong><%= r.name %>:</strong> <%= r.text %>
+          </li>
+        <% }) %>
+      </ul>
+    <% } %>
+
+    <h4 class="text-lg font-medium mb-2">Оставить отзыв</h4>
+    <form method="POST" action="/product/<%= product.id %>/review" class="space-y-3">
+      <input name="name" placeholder="Ваше имя" required class="w-full border px-3 py-2 rounded">
+      <textarea name="text" placeholder="Ваш отзыв" required class="w-full border px-3 py-2 rounded"></textarea>
+      <button type="submit" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">Отправить</button>
+    </form>
+  </main>
+
+  <footer class="bg-gray-200 text-center p-4 mt-10">
+    <p>© ООО «Альянс Торг», 2025</p>
+    <a href="/admin" class="text-blue-600 hover:underline block mt-2">Вход для администратора</a>
+  </footer>
+
+</body>
+</html>
