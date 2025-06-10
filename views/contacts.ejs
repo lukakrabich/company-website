@@ -27,9 +27,24 @@
     <h2 class="text-3xl font-bold text-center mb-4">Контактная информация</h2>
 
     <section class="bg-white p-6 rounded shadow space-y-4">
-      <p><strong>Адрес:</strong> г. Москва, ул. Академика Королева, д. 13, стр. 1</p>
+      <p><strong>Адрес:</strong> г. Москва, ул. Академика Королёва, д. 13, стр. 1</p>
       <p><strong>Телефон:</strong> 8-968-508-0674</p>
       <p><strong>Email:</strong> buh-info77@yandex.ru</p>
+    </section>
+
+    <!-- Карта выше формы -->
+    <section class="bg-white p-6 rounded shadow">
+      <h3 class="text-xl font-semibold mb-4">Мы на карте</h3>
+      <div class="w-full h-[400px]">
+        <iframe 
+          src="https://yandex.ru/map-widget/v1/?ll=37.618354%2C55.818883&z=17&pt=37.618354,55.818883,pm2rdm"
+          width="100%" 
+          height="100%" 
+          frameborder="0"
+          style="border:0;" 
+          allowfullscreen>
+        </iframe>
+      </div>
     </section>
 
     <section class="bg-white p-6 rounded shadow">
@@ -40,19 +55,6 @@
         <textarea name="message" placeholder="Сообщение" required class="w-full border p-2 rounded h-32"></textarea>
         <button type="submit" class="bg-blue-600 text-white px-6 py-2 rounded hover:bg-blue-700">Отправить</button>
       </form>
-    </section>
-
-    <section class="bg-white p-6 rounded shadow">
-      <h3 class="text-xl font-semibold mb-4">Мы на карте</h3>
-      <div class="w-full h-[400px]">
-        <iframe src="https://yandex.ru/map-widget/v1/?um=constructor%3Aeb1554ecf3e1e937646fc08ce1583eb13aeb5307d785379c66ee12163c2dcba1&amp;source=constructor"
-                width="100%" 
-                height="100%" 
-                frameborder="0"
-                style="border:0;" 
-                allowfullscreen>
-        </iframe>
-      </div>
     </section>
   </main>
 
